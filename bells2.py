@@ -33,7 +33,7 @@ s.send(b"Strava Bells says what up!")
 
 ### eventually get this to work w/ other athelete's activities 
 
-STRAVA_ACCESS_TOKEN = '92abd399c5840aa370012936e49d5b6f734f1f4d'  ## i think this is just the public facing API so I can only use my own stuff
+STRAVA_ACCESS_TOKEN = 'xxxxxxxxxxxx'  ## i think this is just the public facing API so I can only use my own stuff
 client = Client(access_token=STRAVA_ACCESS_TOKEN)
 athleteID = [1818295] #1818295
 
