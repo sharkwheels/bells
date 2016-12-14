@@ -8,7 +8,6 @@ import processing.net.*;
 import processing.sound.*;
 
 Server server;
-float newMessageColor = 255;
 PFont f;
 String incomingMessage = "";
 
@@ -34,8 +33,8 @@ int fadeAmount;
 
 void setup() {
   background(0);
-  fadeAmount = 30;
-  size(800, 400);
+  
+  size(1200, 800);
   server = new Server(this, 5000); 
   f = createFont("Arial",16,true);
 
@@ -47,6 +46,7 @@ void setup() {
   bell1.amp(1.0);
   bell2.amp(1.0);
   bell3.amp(1.0);
+  fadeAmount = 30;
   time = millis();//store the current time
 }
 
@@ -77,29 +77,28 @@ void draw() {
       isTitles = true;
       
     } else if(incomingMessage.equals("titlesEnd") == true){
+      background(0);
       isTitles = false;
     }
 
     
 
     if(isTitles){
-      
-      fill(newMessageColor);
-      fill(255,25,255,255);
-      textFont(f);
-      textAlign(CENTER);
       if(!incomingMessage.equals("titlesStart")){
+        fill(255,255,255);
+        textFont(f);
+        textAlign(CENTER);
         text(incomingMessage, width/2,height/2);
         fade  = true;
-        //fade = true;
+        fadeAmount = 5;        
+        
         // this does nothing.
         /*if(millis() - time >= wait){
           fade  = true;
           time = millis();//also update the stored time
         }*/
-      }
-      
-      
+        
+      } 
     }else{
       fade = false;
     }
@@ -108,7 +107,7 @@ void draw() {
     if(incomingMessage.equals("0") == true){
       fade = false;
       println("ding0: "+incomingMessage);
-      zeroCount++;
+      zeroCount+=1;
       println("zeroCount: "+zeroCount);
       bell0.play();
       drawLine(255,255,255,zeroCount);
@@ -116,7 +115,7 @@ void draw() {
     } else if(incomingMessage.equals("1") == true){
       fade = false;
       println("ding1: "+incomingMessage);
-      oneCount++;
+      oneCount+=1;
       println("oneCount: "+oneCount);
       bell1.play();
       drawLine(26,237,170,oneCount);
@@ -125,7 +124,7 @@ void draw() {
     }else if(incomingMessage.equals("2") == true){
       fade = false;
       println("ding2: "+incomingMessage); 
-      twoCount++;
+      twoCount+=1;
       println("twoCount: "+twoCount);
       bell2.play();
       drawLine(244,66,197,twoCount);
@@ -134,7 +133,7 @@ void draw() {
     }else if(incomingMessage.equals("3") == true){
       fade = false;
       println("ding2: "+incomingMessage);
-      threeCount++;
+      threeCount+=1;
       println("threeCount: "+threeCount);
       bell3.play();
       drawLine(237, 143, 49,threeCount); 
@@ -151,9 +150,9 @@ void draw() {
       oneCount = 0;
       twoCount = 0;
       threeCount = 0;
-      delay(3000); // 3 seconds
+      delay(5000); // 5 seconds
+      fadeAmount = 50;
       fade = true;
-
 
 
     } 
@@ -173,28 +172,3 @@ void drawLine(int r, int g, int b,int weightC){
 void serverEvent(Server server,Client client){
   incomingMessage = "A new client has connected: "+ client.ip();
 }
-
-
-
-//timeInterval = 1000.0f;
-  //timePast = millis();
-  /*float timeInterval;
-float timePast;
-int textAlpha = 100;
-int textFade = 2;*/
-
-/*void textFade(){
-  if(millis() > timeInterval + timePast){
-    timePast = millis();
-    textFade *= -1; // reversed???? what??
-  }
-  textAlpha += textFade;
-}
-background(0);
-      textFade();
-      fill(255,25,255,textAlpha);
-      textFont(f);
-      textAlign(CENTER);
-      //text(incomingMessage, width/2,height/2);
-      text("Hello world",width/2,height/2);
-*/

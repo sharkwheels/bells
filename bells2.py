@@ -33,7 +33,7 @@ s.send(b"Strava Bells says what up!")
 
 ### eventually get this to work w/ other athelete's activities 
 
-STRAVA_ACCESS_TOKEN = 'xxxxxxxxxxxx'  ## i think this is just the public facing API so I can only use my own stuff
+STRAVA_ACCESS_TOKEN = 'XXXXXX'  ## i think this is just the public facing API so I can only use my own stuff
 client = Client(access_token=STRAVA_ACCESS_TOKEN)
 athleteID = [1818295] #1818295
 
@@ -91,17 +91,19 @@ def printInterval(streamsFinal):
 			#print(value)
 			titles.append(key)
 			speedComapre.append(value)
-	print("{0} == {1} == {2} == {3}".format(titles[0],titles[1],titles[2],titles[3]))
 	#print(titles)
 	s.send(b"titlesStart")
 	time.sleep(1)
+	print("{0} == {1} == {2} == {3}".format(titles[0],titles[1],titles[2],titles[3]))
 	sendTitles = str("{0} == {1} == {2} == {3}".format(titles[0],titles[1],titles[2],titles[3])).encode()
-	#s.send(sendTitles)
-	#time.sleep(5)
+	s.send(sendTitles)
+	time.sleep(3)
 	#for x in titles:
 	#	title = str("=== {} ===".format(x)).encode()
-	#	#print("=== {} ===".format(x))
+		#print("=== {} ===".format(x))
+	#	s.send(title)
 	#	time.sleep(1)
+	print("titlesEnd")
 	s.send(b"titlesEnd")
 
 	finalSpeeds = zip(*speedComapre)  ### http://stackoverflow.com/questions/4112265/how-to-zip-lists-in-a-list
